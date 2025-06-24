@@ -1,0 +1,229 @@
+task1 
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <ctime>
+using namespace std;
+int main() {
+    srand(static_cast<unsigned int>(time(0)));
+    vector<int> numbers;
+    for (int i = 0; i < 10; ++i) {
+        numbers.push_back(1 + rand() % 100);
+    }
+    for (int n : numbers) {
+        cout << n << " ";
+    }
+    cout << endl;
+    sort(numbers.begin(), numbers.end());
+
+    for (int n : numbers) {
+        cout << n << " ";
+    }
+    cout << endl;
+
+    auto min_it = min_element(numbers.begin(), numbers.end());
+    auto max_it = max_element(numbers.begin(), numbers.end());
+
+    cout << "Minimum: " << *min_it << endl;
+    cout << "Maximum: " << *max_it << endl;
+
+    auto last = unique(numbers.begin(), numbers.end());
+    numbers.erase(last, numbers.end());
+
+    for (int n : numbers) {
+        cout << n << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+task2 
+#include <iostream>
+#include <set>
+using namespace std;
+
+int main() {
+    set<int> numbers;
+    int n;
+
+    for(int i = 0; i < 10; i++) {
+        int input;
+        cin >> input;
+        numbers.insert(input);
+    }
+
+    
+    cin >> n;
+
+    if(numbers.find(n) != numbers.end()) {
+        cout << "Its found" << endl;
+    } else {
+        cout << "Its not found" << endl;
+    }
+
+    return 0;
+}
+task3
+#include <iostream>
+#include <map>
+#include <sstream> 
+#include <string>
+
+using namespace std;
+
+int main() {
+    string input = "this is a test this is only a test";
+    
+    map<string, int> wordCount;
+
+    stringstream ss(input);
+    string word;
+
+    while (ss >> word) {
+        wordCount[word]++;
+    }
+
+    for (const auto& pair : wordCount) {
+        cout << pair.first << " -> " << pair.second << endl;
+    }
+
+    return 0;
+}
+task4
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+int main() {
+    sstring expression;
+    cin >> expression;
+
+    stack<char> s;
+    bool right = true;
+
+    for (char c : expression) {
+        if (c == '(') {
+            s.push(c);
+        } else if (c == ')') {
+            if (s.empty()) {
+                right = false;
+                break;
+            } else {
+                s.pop();
+            }
+        }
+    }
+
+    if (!s.empty()) {
+        right = false;
+    }
+
+    if (right) {
+        cout << "Correct" << endl;
+    } else {
+        cout << "Incorrect" << endl;
+    }
+
+    return 0;
+}
+task5
+#include <iostream>
+#include <queue>
+#include <string>
+using namespace std;
+int main() {
+    queue<std::string> visiters;
+    string name;
+
+
+    for (int i = 0; i < 5; ++i) {
+        cout << "Name " << i + 1 << ": ";
+        getline(std::cin, name); 
+        visiters.push(name);
+    }
+
+    while (!visiters.empty()) {
+        cout << "Now we are serving " << visiters.front() << endl;
+        visiters.pop();
+    }
+
+    cout << "queue is empty" << endl;
+
+    return 0;
+}
+task6
+#include <iostream>
+#include <vector>
+using namespace std;
+double average(const vector<double>& v) {
+    if (v.empty()) {
+        return 0.0;
+    }
+
+    double sum = 0.0;
+
+    for (auto it = v.begin(); it != v.end(); ++it) {
+        sum += *it;
+    }
+
+    return sum / v.size();
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<double> myNumbers[n];
+    for(int i=0; i<n; i++){
+        cin >> myNumbers[i];
+    }
+
+    double resaverage = average(myNumbers);
+
+    for (double num : myNumbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    cout << resaverage << std::endl;
+
+    vector<double> empty;
+    double avgempty = average(empty);
+    cout << avgempty << endl;
+
+    return 0;
+}
+task7
+#include <iostream>   
+#include <vector>     
+#include <algorithm>  
+using namespace std;
+int main() {
+    vector<int> numbers;
+    for (int i = 1; i <= 20; ++i) {
+        numbers.push_back(i);
+    }
+
+    for (int n : numbers) {
+        cout << n << " ";
+    }
+    cout << endl;
+
+    reverse(numbers.begin(), numbers.end());
+    for (int n : numbers) {
+        cout << n << " ";
+    }
+    cout << endl;
+    int evenCount = count_if(numbers.begin(), numbers.end(), [](int n){
+        return n % 2 == 0;
+    });
+    cout << "Even numbers " << evenCount << endl;
+    numbers.erase(remove_if(numbers.begin(), numbers.end(), [](int n){
+        return n % 3 == 0;
+    }), numbers.end());
+    for (int n : numbers) {
+        cout << n << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
