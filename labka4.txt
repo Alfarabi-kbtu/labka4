@@ -95,7 +95,7 @@ task4
 #include <string>
 using namespace std;
 int main() {
-    sstring expression;
+    string expression;
     cin >> expression;
 
     stack<char> s;
